@@ -7,7 +7,7 @@ app.use(express.json());
 
 // Middleware para permitir CORS
 app.use((req, res, next) => {
-    const allowedOrigins = ['http://127.0.0.1:5173', 'https://task-manager-frontend-eta.vercel.app/']; // Adicione outras origens permitidas, se necessário
+    const allowedOrigins = ['http://127.0.0.1:5173', 'https://task-manager-frontend-eta.vercel.app']; // Adicione outras origens permitidas, se necessário
 
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
