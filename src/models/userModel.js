@@ -2,7 +2,7 @@ const connection = require('./connection');
 
 const login = async (email, password) => {
 
-    const [rows] = await connection.promise().query('SELECT * FROM user WHERE email = ? AND password = ? LIMIT 1',
+    const [rows] = await connection.promise().query('SELECT email, name_user, telephone, session_token, date_reg FROM user WHERE email = ? AND password = ? LIMIT 1',
         [email, password]);
 
     if (rows.length > 0) {

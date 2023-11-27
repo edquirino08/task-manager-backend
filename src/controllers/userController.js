@@ -5,7 +5,7 @@ const login = async (req, res) => {
     if (access === null) {
         return res.status(404).json('Invalid');
     }
-    return res.status(200).json('ok');
+    return res.status(200).json(access);
 
 };
 

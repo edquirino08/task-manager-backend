@@ -7,6 +7,6 @@ const userMiddlewares = require('./middlewares/userMiddlewares');
 
 router.post('/login', userMiddlewares.login, userController.login);
 
-router.get('/listTasks', tasksMiddlewares.listTasks, tasksController.listTasks);
+router.post('/listTasks', tasksMiddlewares.listTasks, tasksController.listTasks);
 
 module.exports = router;
