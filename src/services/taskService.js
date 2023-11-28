@@ -1,4 +1,5 @@
 const tasksModel = require('../models/tasksModel');
+const baseServices = require('./baseServices');
 
 const listTasks = async (idUser) => {
     const tasks = await tasksModel.listTasks(idUser);
@@ -6,5 +7,6 @@ const listTasks = async (idUser) => {
 };
 
 module.exports = {
+    baseServices,
     listTasks
 };
