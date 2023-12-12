@@ -16,8 +16,28 @@ const findUserByToken = async (token) => {
     return user;
 };
 
+const validateToken = async (token) => await model.findUserByToken(token);
+
+const findUserByEmail = async (email) => {
+
+    return await model.findUserByEmail(email);
+};
+
+const generateRandomToken = () => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let token = '';
+    for (let i = 0; i < 32; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        token += characters.charAt(randomIndex);
+    }
+    return token;
+};
+
 module.exports = {
     createLog,
     createError,
-    findUserByToken
+    findUserByToken,
+    validateToken,
+    findUserByEmail,
+    generateRandomToken
 };

@@ -13,6 +13,11 @@ const login = async (email, password) => {
     }
 };
 
+const signup = async (email, password, nameUser, telephone, token) => {
+    connection.promise().query('INSERT INTO user (email, password, name_user, telephone, token) VALUES (?,?,?,?,?);', [email, password, nameUser, telephone, token]);
+};
+
 module.exports = {
-    login
+    login,
+    signup
 };

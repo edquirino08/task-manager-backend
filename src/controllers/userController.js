@@ -13,6 +13,20 @@ const login = async (req, res) => {
     }
 };
 
+const signup = async (req, res) => {
+    try {
+        const user = await baseServices.findUserByToken(req.headers.token);
+        const { body } = req;
+        await userService.signup(body.email, body.password, body.nameUser, body.telephone);
+        userService.baseServices.createLog(user.id, '/signup');
+        return res.status(204).json();
+    } catch (err) {
+        userService.baseServices.createError(req.headers.token, `Error /signup: ${err.message}`);
+        return res.status(404).json({ error: 'Error! Invalid credentials' });
+    }
+};
+
 module.exports = {
-    login
+    login,
+    signup
 };

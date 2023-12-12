@@ -9,4 +9,6 @@ router.post('/login', userMiddlewares.login, userController.login);
 
 router.post('/listTasks', authMiddleware, tasksController.listTasks);
 
+router.post('/signup', userMiddlewares.signup, userController.signup);
+
 module.exports = router;
