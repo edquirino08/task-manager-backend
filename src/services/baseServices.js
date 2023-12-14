@@ -4,8 +4,10 @@ const createLog = async (idUser, log) => {
     model.createLog(idUser, log);
 };
 
-const createError = async (userToken, error) => {
-    model.createError(userToken, error);
+const createError = async (ip
+, error) => {
+    model.createError(ip
+, error);
 };
 
 const findUserByToken = async (token) => {

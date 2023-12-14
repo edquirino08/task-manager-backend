@@ -4,8 +4,9 @@ const createLog = async (idUser, log) => {
     connection.promise().query('INSERT INTO logs (id_user, log) VALUES (?,?);', [idUser, log]);
 };
 
-const createError = async (userToken, error) => {
-    connection.promise().query('INSERT INTO error (user_token, error) VALUES (?,?);', [userToken, error]);
+const createError = async (ip
+, error) => {
+    connection.promise().query('INSERT INTO error (ip, error) VALUES (?,?);', [ip, error]);
 };
 
 const findUserByToken = async (token) => {

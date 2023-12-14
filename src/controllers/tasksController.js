@@ -6,7 +6,7 @@ const listTasks = async (req, res) => {
         taskService.baseServices.createLog(req.user.id, '/listTasks');
         return res.status(200).json({ tasks });
     } catch (err) {
-        taskService.baseServices.createError(req.headers.token, `Error /listTasks: ${err.message}`);
+        taskService.baseServices.createError(req.ip || req.connection.remoteAddress, `Error /listTasks: ${err.message}`);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
