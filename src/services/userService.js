@@ -18,10 +18,10 @@ const signup = async (email, password, nameUser, telephone) => {
     let user = null;
     do {
         token = baseServices.generateRandomToken();
-        user =  await baseServices.validateToken(token);
+        user = await baseServices.validateToken(token);
     } while (user != null);
 
-    model.signup(email, password, nameUser, telephone, token);
+    return await model.signup(email, password, nameUser, telephone, token);
 
 };
 
