@@ -19,7 +19,6 @@ const findUserByToken = async (token) => {
 const validateToken = async (token) => await model.findUserByToken(token);
 
 const findUserByEmail = async (email) => {
-
     return await model.findUserByEmail(email);
 };
 

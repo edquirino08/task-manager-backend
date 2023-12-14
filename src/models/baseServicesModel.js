@@ -5,7 +5,7 @@ const createLog = async (idUser, log) => {
 };
 
 const createError = async (ip
-, error) => {
+    , error) => {
     connection.promise().query('INSERT INTO error (ip, error) VALUES (?,?);', [ip, error]);
 };
 

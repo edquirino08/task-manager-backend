@@ -1,12 +1,25 @@
 const model = require('../models/userModel');
 const baseServices = require('./baseServices');
+const bcrypt = require('bcrypt');
 
 const login = async (email, password) => {
-    const access = await model.login(email, password);
-    if (access === null) {
+
+    const user = await baseServices.findUserByEmail(email);
+    if (user === null) {
+        throw Error('Error! User not found.');
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
         throw Error('Error! Invalid credentials.');
     }
-    return access;
+    return {
+        email: user.email,
+        name_user: user.name_user,
+        telephone: user.telephone,
+        token: user.token,
+        date_reg: user.date_reg
+
+    };
 };
 
 const signup = async (email, password, nameUser, telephone) => {
@@ -21,7 +34,8 @@ const signup = async (email, password, nameUser, telephone) => {
         user = await baseServices.validateToken(token);
     } while (user != null);
 
-    return await model.signup(email, password, nameUser, telephone, token);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    return await model.signup(email, hashedPassword, nameUser, telephone, token);
 
 };
 
