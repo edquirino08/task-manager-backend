@@ -10,25 +10,20 @@ const createError = async (ip
 };
 
 const findUserByToken = async (token) => {
-
     const [rows] = await connection.promise().query('SELECT * FROM user WHERE token = ? LIMIT 1', [token]);
-
+    let user = null;
     if (rows.length > 0) {
-        const user = rows[0];
-        return user;
-    } else {
-        return null;
+        user = rows[0];
     }
+    return user;
 };
 
 const findUserByEmail = async (email) => {
-
     const [res] = await connection.promise().query('SELECT * FROM user WHERE email = ? LIMIT 1', [email]);
     if (res.length > 0) {
         return res[0];
     }
     return null;
-
 };
 
 module.exports = {

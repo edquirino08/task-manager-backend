@@ -18,14 +18,13 @@ const login = async (email, password) => {
         telephone: user.telephone,
         token: user.token,
         date_reg: user.date_reg
-
     };
 };
 
 const signup = async (email, password, nameUser, telephone) => {
 
     if (await baseServices.findUserByEmail(email) != null) {
-        throw Error('error! E-mail already registered');
+        throw Error('Error! E-mail already registered.');
     }
     let token = '';
     let user = null;
