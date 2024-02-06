@@ -24,7 +24,7 @@ const signup = (req, res, next) => {
     if (body.telephone === undefined || body.telephone == '') {
         return res.status(400).json({ message: 'The field "telephone" is required' });
     }
-    const regex = /^\d{1,15}$/;
+    const regex = /^\d{8,15}$/;
     if (!regex.test(body.telephone)) {
         return res.status(400).json({ message: 'Error! Invalid telephone.' });
     }
