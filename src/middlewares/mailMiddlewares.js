@@ -1,5 +1,19 @@
 const baseServices = require('../services/baseServices');
 
+const sendVerificationEmail = async (req, res, next) => {
+    const { headers } = req;
+    if (!headers.token) {
+        return res.status(400).json({ error: 'Error! User token is required to this resource.' });
+    }
+    try {
+        req.user = await baseServices.findUserByToken(headers.token);
+    } catch (err) {
+        return res.status(401).json({ error: err.message });
+    }
+    next();
+};
+
+
 const verifyEmail = async (req, res, next) => {
     const { query } = req;
     if (!query.token) {
@@ -14,5 +28,6 @@ const verifyEmail = async (req, res, next) => {
 };
 
 module.exports = {
+    sendVerificationEmail,
     verifyEmail
 };

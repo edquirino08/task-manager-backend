@@ -18,6 +18,8 @@ router.post('/login', userMiddlewares.login, userController.login);
 
 router.post('/listTasks', authMiddleware, tasksController.listTasks);
 
+router.post('/sendVerificationEmail', mailMiddlewares.sendVerificationEmail, mailController.sendVerificationEmail);
+
 router.get('/verifyEmail', mailMiddlewares.verifyEmail, mailController.verifyEmail);
 
 module.exports = router;
