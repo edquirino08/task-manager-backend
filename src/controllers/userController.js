@@ -9,7 +9,7 @@ const login = async (req, res) => {
         return res.status(200).json(access);
     } catch (err) {
         userService.baseServices.createError(req.ip || req.connection.remoteAddress, `Error /login: ${err.message}`);
-        return res.status(404).json({ error: 'Error! Invalid credentials' });
+        return res.status(404).json({ error: err.message });
     }
 };
 

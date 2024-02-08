@@ -6,25 +6,22 @@ const login = async (email, password) => {
 
     const user = await baseServices.findUserByEmail(email);
     if (user === null) {
-        throw Error('Error! User not found.');
+        throw Error('1'); //e-mail not found
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-        throw Error('Error! Invalid credentials.');
+        throw Error('2'); //invalid password
     }
-    return {
-        email: user.email,
-        name_user: user.name_user,
-        telephone: user.telephone,
-        token: user.token,
-        date_reg: user.date_reg
-    };
+    if (!user.confmail) {
+        throw Error('3'); //e-mail not verified
+    }
+    return user;
 };
 
 const signup = async (email, password, nameUser, telephone) => {
 
     if (await baseServices.findUserByEmail(email) != null) {
-        throw Error('Error! E-mail already registered.');
+        throw Error('error! E-mail already registered');
     }
     let token = '';
     let user = null;
