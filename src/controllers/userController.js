@@ -16,9 +16,9 @@ const login = async (req, res) => {
 const signup = async (req, res) => {
     try {
         const { body } = req;
-        const userId = await userService.signup(body.email, body.password, body.nameUser, body.telephone);
-        userService.baseServices.createLog(userId, '/signup');
-        return res.status(204).json();
+        const data = await userService.signup(body.email, body.password, body.nameUser, body.telephone);
+        userService.baseServices.createLog(data.idUser, '/signup');
+        return res.status(200).json({ token: data.token });
     } catch (err) {
         userService.baseServices.createError(req.ip || req.connection.remoteAddress, `Error /signup: ${err.message}`);
         return res.status(404).json({ error: err.message });

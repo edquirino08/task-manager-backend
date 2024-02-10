@@ -31,8 +31,9 @@ const signup = async (email, password, nameUser, telephone) => {
     } while (user != null);
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    return await model.signup(email, hashedPassword, nameUser, telephone, token);
+    const idUser = await model.signup(email, hashedPassword, nameUser, telephone, token);
 
+    return { idUser, token };
 };
 
 module.exports = {

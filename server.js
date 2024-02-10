@@ -1,9 +1,14 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
+const cors = require('cors');
 
 // Configuração para aceitar JSON nas requisições
 app.use(express.json());
+
+app.use(cors({
+    origin: ['http://127.0.0.1:5174', 'http://127.0.0.1:5173', 'https://task-manager-frontend-eta.vercel.app']
+}));
 
 // Middleware para permitir CORS
 app.use((req, res, next) => {
