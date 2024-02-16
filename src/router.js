@@ -16,7 +16,7 @@ router.post('/signup', userMiddlewares.signup, userController.signup);
 
 router.post('/login', userMiddlewares.login, userController.login);
 
-router.post('/listTasks', authMiddleware, tasksController.listTasks);
+router.get('/listTasks', authMiddleware, tasksController.listTasks);
 
 router.post('/sendVerificationEmail', mailMiddlewares.sendVerificationEmail, mailController.sendVerificationEmail);
 
