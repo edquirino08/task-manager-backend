@@ -1,7 +1,7 @@
 const connection = require('./connection');
 
 const listTasks = async (idUser) => {
-    const [tasks] = await connection.promise().query(
+    const [tasks] = await connection.query(
         'SELECT * FROM tasks WHERE id_user = ? order by id desc;',
         [idUser]
     );
