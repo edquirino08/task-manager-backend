@@ -11,8 +11,19 @@ const listTasks = async (req, res) => {
     }
 };
 
+const saveTask = async (req, res) => {
+    try {
+        await taskService.saveTask(req.body, req.user.id);
+        taskService.baseServices.createLog(req.user.id, '/saveTask');
+        return res.status(204).json();
+    } catch (err) {
+        taskService.baseServices.createError(req.ip || req.connection.remoteAddress, `Error /saveTask: ${err.message}`);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
 
 
 module.exports = {
-    listTasks
+    listTasks,
+    saveTask
 };

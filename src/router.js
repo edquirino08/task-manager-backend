@@ -11,12 +11,17 @@ const mailController = require('./controllers/mailController');
 const authMiddleware = require('./middlewares/authMiddleware');
 const userMiddlewares = require('./middlewares/userMiddlewares');
 const mailMiddlewares = require('./middlewares/mailMiddlewares');
+const tasksMiddlewares = require('./middlewares/tasksMiddleware');
+
+/* Routes*/
 
 router.post('/signup', userMiddlewares.signup, userController.signup);
 
 router.post('/login', userMiddlewares.login, userController.login);
 
 router.get('/listTasks', authMiddleware, tasksController.listTasks);
+
+router.post('/saveTask', authMiddleware, tasksMiddlewares.saveTask, tasksController.saveTask);
 
 router.post('/sendVerificationEmail', mailMiddlewares.sendVerificationEmail, mailController.sendVerificationEmail);
 

@@ -6,7 +6,16 @@ const listTasks = async (idUser) => {
     return tasks;
 };
 
+const saveTask = async (task, idUser) => {
+    task.id_user = idUser;
+    if (task.priority === null || task.priority === undefined) {
+        task.priority = 0;
+    }
+    await tasksModel.saveTask(task);
+};
+
 module.exports = {
     baseServices,
-    listTasks
+    listTasks,
+    saveTask
 };

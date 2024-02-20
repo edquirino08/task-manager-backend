@@ -8,6 +8,15 @@ const listTasks = async (idUser) => {
     return tasks;
 };
 
+const saveTask = async (task) => {
+    const [tasks] = await connection.query(
+        'INSERT INTO tasks (id_user, task, status, priority, date_end) VALUES (?,?,?,?,?);',
+        [task.id_user, task.task, task.status, task.priority, task.date_and]
+    );
+    return tasks;
+};
+
 module.exports = {
     listTasks,
+    saveTask
 };
