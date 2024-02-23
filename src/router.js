@@ -27,4 +27,6 @@ router.post('/sendVerificationEmail', mailMiddlewares.sendVerificationEmail, mai
 
 router.get('/verifyEmail', mailMiddlewares.verifyEmail, mailController.verifyEmail);
 
+router.post('/sendNewPassword', mailMiddlewares.sendNewPassword, mailController.sendNewPassword);
+
 module.exports = router;

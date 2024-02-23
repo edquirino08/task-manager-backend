@@ -27,7 +27,16 @@ const verifyEmail = async (req, res, next) => {
     next();
 };
 
+const sendNewPassword = async (req, res, next) => {
+    const { body } = req;
+    if (!body.email) {
+        return res.status(400).json({ error: 'Error! Field "email" is required to this resource.' });
+    }
+    next();
+};
+
 module.exports = {
     sendVerificationEmail,
-    verifyEmail
+    verifyEmail,
+    sendNewPassword
 };

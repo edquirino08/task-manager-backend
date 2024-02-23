@@ -25,7 +25,21 @@ const verifyEmail = async (req, res) => {
 
 };
 
+const sendNewPassword = async (req, res) => {
+    try {
+        const { body } = req;
+        await mailServices.sendNewPassword(req, body.email);
+        mailServices.baseServices.createLog(req.user.id, '/sendNewPassword');
+        return res.status(204).json();
+    } catch (err) {
+        mailServices.baseServices.createError(req.ip || req.connection.remoteAddress, `Error /sendNewPassword: ${err.message}`);
+        return res.status(500).json({ error: err.message });
+    }
+};
+
+
 module.exports = {
     sendVerificationEmail,
-    verifyEmail
+    verifyEmail,
+    sendNewPassword
 };
