@@ -11,7 +11,7 @@ const listTasks = async (idUser) => {
 const saveTask = async (task) => {
     const [tasks] = await connection.query(
         'INSERT INTO tasks (id_user, task, description, status, priority, date_end) VALUES (?,?,?,?,?,?);',
-        [task.id_user, task.task, task.description, task.status, task.priority, task.date_and]
+        [task.id_user, task.task, task.description, task.status, task.priority, task.date_end]
     );
     return tasks;
 };
