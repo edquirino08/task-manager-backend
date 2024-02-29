@@ -8,6 +8,9 @@ const saveTask = (req, res, next) => {
         return res.status(400).json({ message: 'The field "status" is required' });
     }
 
+    if (body.description.length > 255) {
+        throw new Error('Error! The description is longer than 255 characters.');
+    }
     next();
 };
 
