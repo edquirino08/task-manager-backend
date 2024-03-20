@@ -23,6 +23,8 @@ router.get('/listTasks', authMiddleware, tasksController.listTasks);
 
 router.post('/saveTask', authMiddleware, tasksMiddlewares.saveTask, tasksController.saveTask);
 
+router.put('/editTask', authMiddleware, tasksController.editTask);
+
 router.post('/sendVerificationEmail', mailMiddlewares.sendVerificationEmail, mailController.sendVerificationEmail);
 
 router.get('/verifyEmail', mailMiddlewares.verifyEmail, mailController.verifyEmail);

@@ -43,6 +43,10 @@ const generateNewPassword = () => {
     return token;
 };
 
+const findUserbyId = (idUser) => {
+
+};
+
 module.exports = {
     createLog,
     createError,
@@ -50,5 +54,6 @@ module.exports = {
     validateToken,
     findUserByEmail,
     generateRandomToken,
-    generateNewPassword
+    generateNewPassword,
+    findUserbyId
 };

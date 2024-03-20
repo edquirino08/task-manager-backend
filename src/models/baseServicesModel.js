@@ -26,9 +26,19 @@ const findUserByEmail = async (email) => {
     return null;
 };
 
+
+const findUserById = async (idUser) => {
+    const [res] = await connection.query('SELECT * FROM user WHERE id = ? LIMIT 1', [idUser]);
+    if (res.length > 0) {
+        return res[0];
+    }
+    return null;
+};
+
 module.exports = {
     createLog,
     createError,
     findUserByToken,
-    findUserByEmail
+    findUserByEmail,
+    findUserById
 };

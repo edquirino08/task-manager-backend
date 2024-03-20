@@ -22,8 +22,20 @@ const saveTask = async (req, res) => {
     }
 };
 
+const editTask = async (req, res) => {
+    try {
+        await taskService.saveTask(req.body, req.user.id);
+        taskService.baseServices.createLog(req.user.id, '/editTask');
+        return res.status(204).json();
+    } catch (err) {
+        taskService.baseServices.createError(req.ip || req.connection.remoteAddress, `Error /editTask: ${err.message}`);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 
 module.exports = {
     listTasks,
-    saveTask
+    saveTask,
+    editTask
 };
