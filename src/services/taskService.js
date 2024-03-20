@@ -40,10 +40,10 @@ const verifyTaskParams = (task) => {
     if ((typeof task.description !== 'string' || task.description.length > 255))
         throw Error('Error! Invalid task description.');
 
-    if ((typeof task.status !== 'number' || !(task.status >= 0 && task.status <= 2)))
+    if (!(/^[0-9]+$/.test(task.status) || !(task.status >= 0 && task.status <= 2)))
         throw Error('Error! Invalid task status.');
 
-    if ((typeof task.priority !== 'number' || !(task.priority >= 0 && task.status <= 3)))
+    if (!(/^[0-9]+$/.test(task.priority) || !(task.priority >= 0 && task.status <= 3)))
         throw Error('Error! Invalid task priority.');
 };
 
