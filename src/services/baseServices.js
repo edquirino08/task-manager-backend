@@ -43,9 +43,8 @@ const generateNewPassword = () => {
     return token;
 };
 
-const findUserbyId = (idUser) => {
+const findUserbyId = (idUser) => model.findUserById(idUser);
 
-};
 
 module.exports = {
     createLog,

@@ -24,7 +24,7 @@ const saveTask = async (req, res) => {
 
 const editTask = async (req, res) => {
     try {
-        await taskService.saveTask(req.body, req.user.id);
+        await taskService.editTask(req.body, req.user.id);
         taskService.baseServices.createLog(req.user.id, '/editTask');
         return res.status(204).json();
     } catch (err) {

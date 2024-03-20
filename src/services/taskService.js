@@ -31,7 +31,7 @@ const saveTask = async (task, idUser) => {
 
 const verifyTaskParams = (task) => {
 
-    if (baseServices.findUserById(task.id_user) == null)
+    if (baseServices.findUserbyId(task.id_user) == null)
         throw Error('Error! Invalid id_user.');
 
     if ((typeof task.task !== 'string' || task.task.length > 5000))
@@ -51,9 +51,9 @@ const editTask = async (newTask, idUser) => {
 
     newTask.id_user = idUser;
 
-    verifyTaskParams(newTask);
+    verifyTaskParamsEdit(newTask);
 
-    const task = tasksModel.findTaskByIdAndIdUser(newTask.id, idUser);
+    const task = await tasksModel.findTaskByIdAndIdUser(newTask.id, idUser);
 
     if (task === null)
         throw Error('Error! Task not found for this user.');
@@ -70,10 +70,28 @@ const editTask = async (newTask, idUser) => {
     if (newTask.date_end !== null && newTask.date_end !== undefined)
         task.date_end = newTask.date_end;
 
-    if (!tasksModel.editTask(task))
+    const edit = await tasksModel.editTask(task);
+
+    if (!edit)
         throw Error('Error! Could not edit task.');
 
 
+};
+
+
+const verifyTaskParamsEdit = (task) => {
+
+    if (baseServices.findUserbyId(task.id_user) == null)
+        throw Error('Error! Invalid id_user.');
+
+    if ((typeof task.description !== 'string' || task.description.length > 255))
+        throw Error('Error! Invalid task description.');
+
+    if ((typeof task.status !== 'number' || !(task.status >= 0 && task.status <= 2)))
+        throw Error('Error! Invalid task status.');
+
+    if ((typeof task.priority !== 'number' || !(task.priority >= 0 && task.status <= 3)))
+        throw Error('Error! Invalid task priority.');
 };
 
 
