@@ -28,8 +28,9 @@ const editTask = async (req, res) => {
         taskService.baseServices.createLog(req.user.id, '/editTask');
         return res.status(204).json();
     } catch (err) {
-        taskService.baseServices.createError(req.ip || req.connection.remoteAddress, `Error /editTask: ${err.message}`);
-        return res.status(500).json({ error: 'Internal Server Error' });
+        const parsedError = JSON.parse(err.message);
+        taskService.baseServices.createError(req.ip || req.connection.remoteAddress, `Error /editTask: ${parsedError.message}`);
+        return res.status(500).json({ error: parsedError.prefix });
     }
 };
 
