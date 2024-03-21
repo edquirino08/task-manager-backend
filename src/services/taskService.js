@@ -67,8 +67,20 @@ const editTask = async (newTask, idUser) => {
     if (newTask.priority !== null && newTask.priority !== undefined)
         task.priority = newTask.priority;
 
-    if (newTask.date_end !== null && newTask.date_end !== undefined)
-        task.date_end = newTask.date_end;
+    if (newTask.date_end !== null && newTask.date_end !== undefined) {
+
+        const data = new Date(newTask.date_end);
+
+        const ano = data.getFullYear();
+        const mes = (data.getMonth() + 1).toString().padStart(2, '0');
+        const dia = data.getDate().toString().padStart(2, '0');
+        const hora = data.getHours().toString().padStart(2, '0');
+        const minutos = data.getMinutes().toString().padStart(2, '0');
+        const segundos = data.getSeconds().toString().padStart(2, '0');
+
+        task.date_end = `${ano}-${mes}-${dia} ${hora}:${minutos}:${segundos}.0`;
+    }
+
 
     const edit = await tasksModel.editTask(task);
 
@@ -87,10 +99,10 @@ const verifyTaskParamsEdit = (task) => {
     if ((typeof task.description !== 'string' || task.description.length > 255))
         throw Error('Error! Invalid task description.');
 
-    if ((typeof task.status !== 'number' || !(task.status >= 0 && task.status <= 2)))
+    if (!(/^[0-9]+$/.test(task.status)) || !(task.status >= 0 && task.status <= 2))
         throw Error('Error! Invalid task status.');
 
-    if ((typeof task.priority !== 'number' || !(task.priority >= 0 && task.status <= 3)))
+    if (!(/^[0-9]+$/.test(task.priority)) || !(task.priority >= 0 && task.status <= 3))
         throw Error('Error! Invalid task priority.');
 };
 
